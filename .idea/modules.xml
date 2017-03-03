@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/business_one/business_one.iml" filepath="$PROJECT_DIR$/business_one/business_one.iml" />
       <module fileurl="file://$PROJECT_DIR$/business_two/business_two.iml" filepath="$PROJECT_DIR$/business_two/business_two.iml" />
       <module fileurl="file://$PROJECT_DIR$/componentApp.iml" filepath="$PROJECT_DIR$/componentApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/router/router.iml" filepath="$PROJECT_DIR$/router/router.iml" />
     </modules>
   </component>

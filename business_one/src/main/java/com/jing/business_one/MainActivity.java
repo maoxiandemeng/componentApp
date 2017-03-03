@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                ActivityRouter.openActivity(MainActivity.this, "business_two://main?two=two test");
-                activityOpen.openTwo("two test");
+                activityOpen.openTwo("two test", "1234");
             }
         });
     }

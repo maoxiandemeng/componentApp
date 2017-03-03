@@ -1,1 +1,1 @@
-include ':app', ':business_one', ':router', ':business_two'
+include ':app', ':business_one', ':router', ':business_two', ':library'

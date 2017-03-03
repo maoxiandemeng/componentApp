@@ -10,5 +10,5 @@ import com.jing.router.annotation.RouterUri;
 public interface ActivityOpen {
 
     @RouterUri(routerUri = "business_two://main")
-    public void openTwo(@RouterParam("two") String two);
+    void openTwo(@RouterParam("two") String two, @RouterParam("id") String id);
 }
