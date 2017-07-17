@@ -2,7 +2,7 @@ package com.jing.library.imageloader;
 
 import android.widget.ImageView;
 
-import com.library.R;
+import com.jing.library.R;
 
 public class ImageLoader {
     private int type;  //类型 (id，file)
