@@ -1,22 +1,29 @@
 package com.jing.componentapp;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.jing.componentapp.router.ActivitySchemeOpen;
+import com.jing.library.base.BaseCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+import butterknife.BindView;
+
+public class MainActivity extends BaseCompatActivity {
+
+    @BindView(R.id.test)
+    TextView test;
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.activity_main;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        TextView test = (TextView) findViewById(R.id.test);
         Uri data = getIntent().getData();
         if (data != null) {
             String main = data.getQueryParameter("main");
@@ -32,4 +39,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }
