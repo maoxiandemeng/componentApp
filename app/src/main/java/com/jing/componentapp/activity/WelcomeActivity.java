@@ -1,10 +1,11 @@
-package com.jing.componentapp;
+package com.jing.componentapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 
+import com.jing.componentapp.R;
 import com.jing.library.base.BaseCompatActivity;
 
 /**

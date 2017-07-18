@@ -22,11 +22,14 @@ public class ImageLoader {
         this.imgView = builder.imgView;
         this.wifiStrategy = builder.wifiStrategy;
     }
+
     public int getType() {
         return type;
     }
 
-    public int getTransform(){ return transform; }
+    public int getTransform() {
+        return transform;
+    }
 
     public String getUrl() {
         return url;
@@ -62,7 +65,7 @@ public class ImageLoader {
             this.transform = ImageLoaderUtil.TRANSFORM_NORMAL;
             this.url = "";
             this.placeHolder = R.drawable.image_loading;
-            this.errorHolder = R.drawable.image_error;
+            this.errorHolder = R.drawable.image_loading;
             this.imgView = null;
             this.wifiStrategy = ImageLoaderUtil.LOAD_STRATEGY_NORMAL;
         }
@@ -72,7 +75,7 @@ public class ImageLoader {
             return this;
         }
 
-        public Builder transform(int transform){
+        public Builder transform(int transform) {
             this.transform = transform;
             return this;
         }

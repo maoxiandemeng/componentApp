@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        icon="@drawable/icon_home_selector"
+        id="@+id/tab_home"
+        title="首页"/>
+    <tab
+        icon="@drawable/icon_shop_selector"
+        id="@+id/tab_shop"
+        title="商店"/>
+    <tab
+        icon="@drawable/icon_cart_selector"
+        id="@+id/tab_cart"
+        title="购物车"/>
+</tabs>
