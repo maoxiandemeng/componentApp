@@ -8,5 +8,5 @@ import com.jing.library.adapter.BaseViewHolder;
  */
 
 public interface OnRecyclerItemClickListener {
-    void setOnRecyclerItemClick(BaseViewHolder holder, BaseRecyclerAdapter adapter, int position);
+    void setOnRecyclerItemClick(BaseViewHolder viewHolder, BaseRecyclerAdapter adapter, int position);
 }

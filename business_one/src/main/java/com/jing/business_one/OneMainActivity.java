@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.jing.business_one.base.BaseCompatActivity;
 import com.jing.business_one.router.OneActivitySchemeOpen;
-import com.jing.library.base.BaseCompatActivity;
 
 import butterknife.BindView;
 

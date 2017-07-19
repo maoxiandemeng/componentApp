@@ -132,7 +132,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
         }
     }
 
-    protected abstract void onBind(BaseViewHolder holder, int realPosition, int itemViewType);
+    protected abstract void onBind(BaseViewHolder viewHolder, int realPosition, int itemViewType);
 
     @Override
     public int getItemCount() {
@@ -251,8 +251,18 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
     }
 
     public void addData(ArrayList<T> newData) {
-        this.mData.addAll(newData);
-        notifyDataSetChanged();
+        if (!newData.isEmpty()) {
+            mData.addAll(newData);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void clearAddData(ArrayList<T> newData) {
+        mData.clear();
+        if (!newData.isEmpty()) {
+            mData.addAll(newData);
+            notifyDataSetChanged();
+        }
     }
 
 //    public void remove(int position){

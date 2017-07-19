@@ -69,4 +69,12 @@
         <attr name="ci_normalStrokeWidth" format="dimension"/>
         <attr name="ci_isBlink" format="boolean"/>
     </declare-styleable>
+
+    <!--刷新头-->
+    <declare-styleable name="MaterialHeader">
+        <attr name="mhPrimaryColor" format="color" />
+        <attr name="mhShadowColor" format="color" />
+        <attr name="mhShadowRadius" format="dimension"/>
+        <attr name="mhShowBezierWave" format="boolean"/>
+    </declare-styleable>
 </resources>

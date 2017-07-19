@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 
 import com.jing.componentapp.R;
-import com.jing.library.base.BaseCompatActivity;
+import com.jing.componentapp.base.BaseCompatActivity;
 
 /**
  * Created by liujing on 2017/7/17.

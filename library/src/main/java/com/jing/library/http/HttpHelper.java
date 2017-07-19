@@ -19,10 +19,12 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 
 /**
+ * 网络请求的基本封装
  */
 
 public class HttpHelper {
@@ -84,6 +86,12 @@ public class HttpHelper {
         httpClient.cache(new Cache(httpCacheDirectory, 10 * 1024 * 1024));
         httpClient.addNetworkInterceptor(new LogInterceptor());
         httpClient.addInterceptor(new CacheControlInterceptor());
+//        httpClient.addInterceptor(new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+//            @Override
+//            public void log(String message) {
+//                Log.i("httpBody","httpBody: "+message);
+//            }
+//        }).setLevel(HttpLoggingInterceptor.Level.BODY));
         //https请求添加证书
 //        httpClient.socketFactory(sslSocketFactory);
         //添加cookie信息
