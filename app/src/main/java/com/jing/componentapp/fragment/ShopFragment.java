@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.jing.componentapp.R;
 import com.jing.componentapp.adapter.HomeAdapter;
 import com.jing.componentapp.base.BaseLazyFragment;
+import com.jing.componentapp.bean.FuLiBean;
 import com.jing.library.refresh.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -50,7 +51,7 @@ public class ShopFragment extends BaseLazyFragment implements OnRefreshListener,
 //        refreshLayout.setRefreshHeader(new MaterialHeader(activity));
 //        refreshLayout.setRefreshFooter(new BallPulseFooter(activity));
 
-        adapter = new HomeAdapter(activity, new ArrayList<String>());
+        adapter = new HomeAdapter(activity, new ArrayList<FuLiBean>());
         recyclerView.setAdapter(adapter);
 
         refreshLayout.setOnRefreshListener(this);
@@ -76,35 +77,35 @@ public class ShopFragment extends BaseLazyFragment implements OnRefreshListener,
 
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
-        final ArrayList<String> strings = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            strings.add(String.valueOf(i));
-        }
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                adapter.clearAddData(strings);
-                refreshLayout.finishRefresh();
-            }
-        }, 2000);
+//        final ArrayList<String> strings = new ArrayList<>();
+//        for (int i = 0; i < 20; i++) {
+//            strings.add(String.valueOf(i));
+//        }
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                adapter.clearAddData(strings);
+//                refreshLayout.finishRefresh();
+//            }
+//        }, 2000);
 
     }
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
-        final ArrayList<String> strings = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            strings.add(String.valueOf(i));
-        }
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                adapter.addData(strings);
-                refreshLayout.finishLoadmore();
-            }
-        }, 2000);
+//        final ArrayList<String> strings = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            strings.add(String.valueOf(i));
+//        }
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                adapter.addData(strings);
+//                refreshLayout.finishLoadmore();
+//            }
+//        }, 2000);
 
     }
 

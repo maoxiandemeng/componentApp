@@ -21,7 +21,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 /**
  * 网络请求的基本封装
@@ -84,14 +84,14 @@ public class HttpHelper {
 
         File httpCacheDirectory = new File(mContext.getCacheDir(), "okHttpCache");
         httpClient.cache(new Cache(httpCacheDirectory, 10 * 1024 * 1024));
-        httpClient.addNetworkInterceptor(new LogInterceptor());
+//        httpClient.addNetworkInterceptor(new LogInterceptor());
         httpClient.addInterceptor(new CacheControlInterceptor());
-//        httpClient.addInterceptor(new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-//            @Override
-//            public void log(String message) {
-//                Log.i("httpBody","httpBody: "+message);
-//            }
-//        }).setLevel(HttpLoggingInterceptor.Level.BODY));
+        httpClient.addInterceptor(new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                Log.i("httpBody","httpBody: "+message);
+            }
+        }).setLevel(HttpLoggingInterceptor.Level.BODY));
         //https请求添加证书
 //        httpClient.socketFactory(sslSocketFactory);
         //添加cookie信息
@@ -116,7 +116,7 @@ public class HttpHelper {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(base_url)
                 .addConverterFactory(MyGsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
                 .build();
 
@@ -148,7 +148,7 @@ public class HttpHelper {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
-            if (!NetUtils.isNetworkConnected(mContext)) {
+            if (!NetUtils.isNetworkConnected()) {
                 request = request.newBuilder()
                         .cacheControl(CacheControl.FORCE_CACHE)
                         .build();
@@ -156,7 +156,7 @@ public class HttpHelper {
 
             Response response = chain.proceed(request);
 
-            if (NetUtils.isNetworkConnected(mContext)) {
+            if (NetUtils.isNetworkConnected()) {
                 int maxAge = 60 * 60; // read from cache for 1 minute
                 response.newBuilder()
                         .removeHeader("Pragma")

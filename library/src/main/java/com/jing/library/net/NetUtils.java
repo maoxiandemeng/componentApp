@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.jing.library.utils.Utils;
+
 /**
  * Created by jon on 2016/12/20
  */
@@ -18,15 +20,11 @@ public class NetUtils {
 
     /**
      * 判断网络是否连接
-     * @param context
      * @return 已连接true 未连接false
      */
-    public static boolean isNetworkConnected(Context context) {
-        if (null == context) {
-            return false;
-        }
+    public static boolean isNetworkConnected() {
         // 获取手机所有连接管理对象（包括wifi，net等连接的管理）
-        ConnectivityManager connectivityManager = (ConnectivityManager) context
+        ConnectivityManager connectivityManager = (ConnectivityManager) Utils.getContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager != null) {
             // 获取网络连接管理的对象

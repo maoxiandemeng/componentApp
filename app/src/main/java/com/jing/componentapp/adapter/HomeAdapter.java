@@ -4,11 +4,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jing.componentapp.R;
+import com.jing.componentapp.bean.FuLiBean;
 import com.jing.library.adapter.BaseRecyclerAdapter;
 import com.jing.library.adapter.BaseViewHolder;
+import com.jing.library.imageloader.ImageLoader;
+import com.jing.library.imageloader.ImageLoaderUtil;
 
 import java.util.ArrayList;
 
@@ -19,8 +23,8 @@ import butterknife.ButterKnife;
  * Created by liujing on 2017/7/19.
  */
 
-public class HomeAdapter extends BaseRecyclerAdapter<String> {
-    public HomeAdapter(Context context, ArrayList<String> mData) {
+public class HomeAdapter extends BaseRecyclerAdapter<FuLiBean> {
+    public HomeAdapter(Context context, ArrayList<FuLiBean> mData) {
         super(context, mData);
     }
 
@@ -37,12 +41,14 @@ public class HomeAdapter extends BaseRecyclerAdapter<String> {
     @Override
     protected void onBind(BaseViewHolder viewHolder, int realPosition, int itemViewType) {
         HomeHolder holder = (HomeHolder) viewHolder;
-        holder.tv.setText(mData.get(realPosition));
+        FuLiBean bean = mData.get(realPosition);
+        ImageLoader loader = new ImageLoader.Builder().url(bean.getUrl()).imgView(holder.img).build();
+        ImageLoaderUtil.getInstance().loadImage(context, loader);
     }
 
     public static class HomeHolder extends BaseViewHolder {
-        @BindView(R.id.tv)
-        TextView tv;
+        @BindView(R.id.img)
+        ImageView img;
 
         public HomeHolder(View itemView) {
             super(itemView);

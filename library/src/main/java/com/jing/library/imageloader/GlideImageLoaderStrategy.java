@@ -67,7 +67,7 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy {
      * load image with Glide
      */
     private void loadNormal(Context ctx, ImageLoader img) {
-        Glide.with(ctx).load(img.getUrl()).placeholder(img.getPlaceHolder()).error(img.getErrorHolder()).into(img.getImgView());
+        Glide.with(ctx).load(img.getUrl()).placeholder(img.getPlaceHolder()).error(img.getErrorHolder()).crossFade(200).into(img.getImgView());
     }
 
     private void loadCircleNormal(Context ctx, ImageLoader img) {
