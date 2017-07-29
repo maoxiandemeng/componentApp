@@ -20,7 +20,11 @@ import com.jing.componentapp.base.BaseCompatActivity;
 import com.jing.componentapp.fragment.CartFragment;
 import com.jing.componentapp.fragment.HomeFragment;
 import com.jing.componentapp.fragment.ShopFragment;
+import com.jing.componentapp.rxjava.RxJavaActivity;
 import com.jing.componentapp.tools.LogTool;
+import com.jing.library.adapter.BaseRecyclerAdapter;
+import com.jing.library.adapter.BaseViewHolder;
+import com.jing.library.adapter.listener.OnRecyclerItemClickListener;
 import com.jing.library.utils.ToastUtils;
 import com.jing.library.viewpager.ScrollViewPager;
 import com.roughike.bottombar.BottomBar;
@@ -31,11 +35,9 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseCompatActivity {
+public class MainActivity extends BaseCompatActivity implements OnRecyclerItemClickListener {
     @BindView(R.id.tool_bar)
     Toolbar toolbar;
-    @BindView(R.id.bar_name)
-    TextView barName;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.drawer_layout)
@@ -65,11 +67,13 @@ public class MainActivity extends BaseCompatActivity {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         ArrayList<String> list = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            list.add(String.valueOf(i));
-        }
+        list.add("RxJava");
+        list.add(String.valueOf(2));
+        list.add(String.valueOf(3));
+        list.add(String.valueOf(4));
         DrawerAdapter drawerAdapter = new DrawerAdapter(this, list);
         recyclerView.setAdapter(drawerAdapter);
+        drawerAdapter.setOnRecyclerItemClickListener(this);
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
@@ -149,6 +153,15 @@ public class MainActivity extends BaseCompatActivity {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void setOnRecyclerItemClick(BaseViewHolder viewHolder, BaseRecyclerAdapter adapter, int position) {
+        switch (position) {
+            case 0:
+                openActivity(RxJavaActivity.class);
+                break;
         }
     }
 }

@@ -11,34 +11,42 @@
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srlFixedHeaderViewId="@+id/fix"
-        app:srlEnableHeaderTranslationContent="false">
+        app:srlEnableHeaderTranslationContent="false"
+        app:srlFixedHeaderViewId="@+id/fix">
 
         <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:srlClassicsSpinnerStyle="FixedBehind" />
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:gravity="center"
-                android:id="@+id/fix"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="悬浮的"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:background="@color/colorAccent"/>
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/fix"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/colorAccent"
+                    android:gravity="center"
+                    android:text="悬浮的"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
-                android:paddingTop="60dp"
-                android:background="@color/white"
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </FrameLayout>
+                android:layout_height="match_parent"
+                android:background="@color/white" />
+        </LinearLayout>
 
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter
             android:layout_width="match_parent"

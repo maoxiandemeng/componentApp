@@ -27,6 +27,7 @@
                     android:scheme="app" />
             </intent-filter>
         </activity>
+        <activity android:name=".rxjava.RxJavaActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

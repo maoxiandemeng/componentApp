@@ -11,6 +11,7 @@
         android:src="@color/colorAccent" />
 
     <TextView
+        android:id="@+id/tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -22,6 +23,6 @@
         android:layout_gravity="center_vertical"
         android:layout_marginRight="16dp"
         android:gravity="right"
-        android:text="个人中心" />
+        android:text="" />
 
 </LinearLayout>
