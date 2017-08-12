@@ -1,19 +1,11 @@
 package com.jing.componentapp.fragment;
 
-import android.os.Handler;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
-import android.widget.TextView;
 
 import com.jing.componentapp.R;
 import com.jing.componentapp.activity.SpacesItemDecoration;
 import com.jing.componentapp.adapter.HomeAdapter;
-import com.jing.componentapp.api.ApiRequest;
-import com.jing.componentapp.api.GankCallBack;
-import com.jing.componentapp.api.Result;
-import com.jing.componentapp.base.BaseLazyFragment;
 import com.jing.componentapp.bean.FuLiBean;
 import com.jing.componentapp.presenter.HomePresenter;
 import com.jing.componentapp.router.ActivitySchemeOpen;
@@ -21,7 +13,8 @@ import com.jing.componentapp.view.HomeView;
 import com.jing.library.adapter.BaseRecyclerAdapter;
 import com.jing.library.adapter.BaseViewHolder;
 import com.jing.library.adapter.listener.OnRecyclerItemClickListener;
-import com.jing.library.http.HttpHelper;
+import com.jing.library.base.BaseLazyFragment;
+import com.jing.library.utils.Helper;
 import com.jing.library.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -31,15 +24,15 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by liujing on 2017/7/19.
  */
 
 public class HomeFragment extends BaseLazyFragment implements OnRefreshListener, OnLoadmoreListener, HomeView {
+    private Unbinder bind;
 //    @BindView(R.id.tool_bar)
 //    Toolbar toolbar;
 //    @BindView(R.id.bar_name)
@@ -60,13 +53,14 @@ public class HomeFragment extends BaseLazyFragment implements OnRefreshListener,
 
     @Override
     protected void init() {
+        bind = ButterKnife.bind(this, contentView);
 //        toolbar.setNavigationIcon(R.drawable.icon_home);
 //        barName.setText("首页");
 //        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);
         RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new SpacesItemDecoration(16));
+        recyclerView.addItemDecoration(new SpacesItemDecoration(Helper.dp2px(8)));
 
         adapter = new HomeAdapter(activity, new ArrayList<FuLiBean>());
         recyclerView.setAdapter(adapter);
@@ -140,5 +134,11 @@ public class HomeFragment extends BaseLazyFragment implements OnRefreshListener,
         if (refreshLayout.isLoading()) {
             refreshLayout.finishLoadmore();
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        bind.unbind();
     }
 }

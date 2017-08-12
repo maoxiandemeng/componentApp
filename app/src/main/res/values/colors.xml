@@ -6,6 +6,12 @@
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#00FF00</color>
+    <color name="blue">#0000FF</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="purple">#FF00FF</color>
+
     <color name="tab_select">#0061b2</color>
     <color name="tab_normal">#333333</color>
 </resources>

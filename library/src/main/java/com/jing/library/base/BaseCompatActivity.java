@@ -1,14 +1,10 @@
-package com.jing.business_one.base;
+package com.jing.library.base;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-
-import com.jing.business_one.tools.LogTool;
-
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+import android.util.Log;
 
 /**
  * Created by liujing on 2017/7/17.
@@ -17,14 +13,11 @@ import butterknife.Unbinder;
 public abstract class BaseCompatActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
 
-    private Unbinder bind;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "--------onCreate--------");
         setContentView(getLayoutResId());
-        LogTool.d(TAG, "onCreate");
-        bind = ButterKnife.bind(this);
     }
 
     protected abstract int getLayoutResId();
@@ -32,38 +25,37 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        LogTool.d(TAG, "onRestart");
+        Log.d(TAG, "--------onRestart--------");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        LogTool.d(TAG, "onStart");
+        Log.d(TAG, "--------onStart--------");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        LogTool.d(TAG, "onResume");
+        Log.d(TAG, "--------onResume--------");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        LogTool.d(TAG, "onPause");
+        Log.d(TAG, "--------onPause--------");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        LogTool.d(TAG, "onStop");
+        Log.d(TAG, "--------onStop--------");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LogTool.d(TAG, "onDestroy");
-        bind.unbind();
+        Log.d(TAG, "--------onDestroy--------");
     }
 
     public void openActivity(Class<?> cls){

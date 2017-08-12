@@ -6,13 +6,13 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 
 import com.jing.componentapp.R;
-import com.jing.componentapp.base.BaseCompatActivity;
+import com.jing.componentapp.base.BaseActivity;
 
 /**
  * Created by liujing on 2017/7/17.
  */
 
-public class WelcomeActivity extends BaseCompatActivity {
+public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResId() {

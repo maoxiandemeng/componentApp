@@ -15,7 +15,7 @@ import android.view.View;
 import com.jing.componentapp.R;
 import com.jing.componentapp.adapter.DrawerAdapter;
 import com.jing.componentapp.adapter.MainPagerAdapter;
-import com.jing.componentapp.base.BaseCompatActivity;
+import com.jing.componentapp.base.BaseActivity;
 import com.jing.componentapp.fragment.CartFragment;
 import com.jing.componentapp.fragment.HomeFragment;
 import com.jing.componentapp.fragment.ShopFragment;
@@ -25,6 +25,7 @@ import com.jing.componentapp.tools.LogTool;
 import com.jing.library.adapter.BaseRecyclerAdapter;
 import com.jing.library.adapter.BaseViewHolder;
 import com.jing.library.adapter.listener.OnRecyclerItemClickListener;
+import com.jing.library.utils.Helper;
 import com.jing.library.utils.ToastUtils;
 import com.jing.library.viewpager.ScrollViewPager;
 import com.roughike.bottombar.BottomBar;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseCompatActivity implements OnRecyclerItemClickListener {
+public class MainActivity extends BaseActivity implements OnRecyclerItemClickListener {
     @BindView(R.id.tool_bar)
     Toolbar toolbar;
     @BindView(R.id.recycler_view)
@@ -73,6 +74,7 @@ public class MainActivity extends BaseCompatActivity implements OnRecyclerItemCl
         list.add(String.valueOf(4));
         DrawerAdapter drawerAdapter = new DrawerAdapter(this, list);
         recyclerView.setAdapter(drawerAdapter);
+        recyclerView.addItemDecoration(new SpacesItemDecoration(Helper.dp2px(8)));
         drawerAdapter.setOnRecyclerItemClickListener(this);
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override

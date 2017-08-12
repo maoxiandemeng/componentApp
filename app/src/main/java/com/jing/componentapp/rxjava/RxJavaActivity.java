@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 import com.jing.componentapp.R;
 import com.jing.componentapp.api.ApiRequest;
 import com.jing.componentapp.api.GankResult;
-import com.jing.componentapp.base.BaseCompatActivity;
+import com.jing.componentapp.base.BaseActivity;
 import com.jing.componentapp.bean.FuLiBean;
 import com.jing.componentapp.tools.LogTool;
 import com.jing.library.http.HttpHelper;
@@ -27,7 +27,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by liujing on 2017/7/27.
  */
 
-public class RxJavaActivity extends BaseCompatActivity {
+public class RxJavaActivity extends BaseActivity {
     private static final String TAG = "RxJavaActivity";
 
     @BindView(R.id.tool_bar)

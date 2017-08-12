@@ -1,16 +1,14 @@
-package com.jing.business_one.base;
+package com.jing.library.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
-import com.jing.business_one.tools.LogTool;
-
+import android.util.Log;
 
 /**
  * Created by liujing on 2017/7/19.
  */
 
-public abstract class BaseLazyFragment extends BaseFragment {
+public abstract class BaseLazyFragment extends BaseCompatFragment {
     //判断界面是否可见
     private boolean isVisible = false;
     //判断是否第一次加载数据
@@ -54,7 +52,7 @@ public abstract class BaseLazyFragment extends BaseFragment {
         if (!isVisible || !isFirst || !isInit) {
             return;
         }
-        LogTool.i(getClass().getSimpleName(), "lazyData");
+        Log.i(getClass().getSimpleName(), "lazyData");
         lazyData();
         isFirst = false;
     }

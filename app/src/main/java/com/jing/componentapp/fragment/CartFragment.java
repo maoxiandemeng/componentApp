@@ -1,7 +1,7 @@
 package com.jing.componentapp.fragment;
 
 import com.jing.componentapp.R;
-import com.jing.componentapp.base.BaseLazyFragment;
+import com.jing.library.base.BaseLazyFragment;
 
 /**
  * Created by liujing on 2017/7/19.
