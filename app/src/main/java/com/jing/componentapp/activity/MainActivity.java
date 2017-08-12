@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.TextView;
 
 import com.jing.componentapp.R;
 import com.jing.componentapp.adapter.DrawerAdapter;
@@ -20,6 +19,7 @@ import com.jing.componentapp.base.BaseCompatActivity;
 import com.jing.componentapp.fragment.CartFragment;
 import com.jing.componentapp.fragment.HomeFragment;
 import com.jing.componentapp.fragment.ShopFragment;
+import com.jing.componentapp.router.ActivitySchemeOpen;
 import com.jing.componentapp.rxjava.RxJavaActivity;
 import com.jing.componentapp.tools.LogTool;
 import com.jing.library.adapter.BaseRecyclerAdapter;
@@ -161,6 +161,9 @@ public class MainActivity extends BaseCompatActivity implements OnRecyclerItemCl
         switch (position) {
             case 0:
                 openActivity(RxJavaActivity.class);
+                break;
+            case 1:
+                ActivitySchemeOpen.getInstance().getRouter().openOne("one");
                 break;
         }
     }

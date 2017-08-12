@@ -8,11 +8,8 @@ import android.widget.TextView;
 import com.jing.business_two.base.BaseCompatActivity;
 import com.jing.business_two.router.TwoActivitySchemeOpen;
 
-import butterknife.BindView;
-
 public class TwoMainActivity extends BaseCompatActivity {
 
-    @BindView(R2.id.two_test)
     TextView twoTest;
 
     @Override
@@ -23,6 +20,7 @@ public class TwoMainActivity extends BaseCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        twoTest = (TextView) findViewById(R.id.two_test);
         Uri data = getIntent().getData();
         if (data != null) {
             String one = data.getQueryParameter("two");
