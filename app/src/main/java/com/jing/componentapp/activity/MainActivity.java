@@ -66,6 +66,7 @@ public class MainActivity extends BaseActivity implements OnRecyclerItemClickLis
         }
         initFragment();
         LinearLayoutManager manager = new LinearLayoutManager(this);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(manager);
         ArrayList<String> list = new ArrayList<>();
         list.add("RxJava");

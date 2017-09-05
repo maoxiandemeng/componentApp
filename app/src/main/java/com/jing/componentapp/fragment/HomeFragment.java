@@ -1,7 +1,7 @@
 package com.jing.componentapp.fragment;
 
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.jing.componentapp.R;
 import com.jing.componentapp.activity.SpacesItemDecoration;
@@ -57,13 +57,13 @@ public class HomeFragment extends BaseLazyFragment implements OnRefreshListener,
 //        toolbar.setNavigationIcon(R.drawable.icon_home);
 //        barName.setText("首页");
 //        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);
-        RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        GridLayoutManager layoutManager = new GridLayoutManager(activity, 2);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new SpacesItemDecoration(Helper.dp2px(8)));
 
-        adapter = new HomeAdapter(activity, new ArrayList<FuLiBean>());
+        adapter = new HomeAdapter(activity, null);
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new SpacesItemDecoration(Helper.dp2px(8)));
 
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadmoreListener(this);
