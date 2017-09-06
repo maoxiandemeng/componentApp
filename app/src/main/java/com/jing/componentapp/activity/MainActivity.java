@@ -21,11 +21,11 @@ import com.jing.componentapp.fragment.HomeFragment;
 import com.jing.componentapp.fragment.ShopFragment;
 import com.jing.componentapp.router.ActivitySchemeOpen;
 import com.jing.componentapp.rxjava.RxJavaActivity;
-import com.jing.componentapp.tools.LogTool;
 import com.jing.library.adapter.BaseRecyclerAdapter;
 import com.jing.library.adapter.BaseViewHolder;
 import com.jing.library.adapter.listener.OnRecyclerItemClickListener;
 import com.jing.library.utils.Helper;
+import com.jing.library.utils.LogUtil;
 import com.jing.library.utils.ToastUtils;
 import com.jing.library.viewpager.ScrollViewPager;
 import com.roughike.bottombar.BottomBar;
@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity implements OnRecyclerItemClickLis
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 //抽屉滑动时调用
-                LogTool.i("onDrawerSlide", "slideOffset:" + slideOffset);
+                LogUtil.i("onDrawerSlide", "slideOffset:" + slideOffset);
             }
 
             @Override
@@ -142,6 +142,7 @@ public class MainActivity extends BaseActivity implements OnRecyclerItemClickLis
 
     private void initFragment() {
         viewPager.setCanScroll(false);
+        viewPager.setOffscreenPageLimit(2);
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
         fragments.add(new ShopFragment());

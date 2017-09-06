@@ -7,11 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.jing.componentapp.R;
 import com.jing.library.utils.Helper;
+import com.jing.library.utils.LogUtil;
 
 /**
  * Created by liujing on 2017/9/5.
@@ -40,11 +40,11 @@ public class LogisticsView extends View {
     }
 
     public void setBitmap(int resId, boolean isDrawLast) {
-        this.bitmap =  BitmapFactory.decodeResource(getResources(), resId);
+        this.bitmap = BitmapFactory.decodeResource(getResources(), resId);
         this.isDrawLast = isDrawLast;
         bitmapWidth = bitmap.getWidth();
         bitmapHeight = bitmap.getHeight();
-        Log.i(TAG, "bitmapWidth: "+bitmapWidth + "bitmapHeight: "+bitmapHeight);
+        LogUtil.i(TAG, "bitmapWidth: " + bitmapWidth + "bitmapHeight: " + bitmapHeight);
         invalidate();
     }
 
@@ -58,7 +58,7 @@ public class LogisticsView extends View {
 
     public LogisticsView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        Log.i(TAG, "LogisticsView: ");
+        LogUtil.i(TAG, "LogUtilisticsView: ");
         showPaint = new Paint();
         showPaint.setAntiAlias(true);
         defaultPaint = new Paint();
@@ -73,7 +73,7 @@ public class LogisticsView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        Log.i(TAG, "onMeasure: ");
+        LogUtil.i(TAG, "onMeasure: ");
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         if (widthMode == MeasureSpec.AT_MOST || widthMode == MeasureSpec.UNSPECIFIED) {
@@ -95,25 +95,25 @@ public class LogisticsView extends View {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        Log.i(TAG, "onLayout: " + width + " height: " + height);
+        LogUtil.i(TAG, "onLayout: " + width + " height: " + height);
         if (height < width) {
             throw new IllegalArgumentException("width must be more than height");
         }
-        startX = (float) width/2;
+        startX = (float) width / 2;
         startY = bitmapHeight;
         if (bitmapWidth >= width) {
             drawX = drawY = 0;
         } else {
-            drawX = (width - bitmapWidth)/2;
+            drawX = (width - bitmapWidth) / 2;
             drawY = 0;
         }
-        Log.i(TAG, "drawX: " + drawX + " drawY: " + drawY);
+        LogUtil.i(TAG, "drawX: " + drawX + " drawY: " + drawY);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.i(TAG, "onDraw: ");
+        LogUtil.i(TAG, "onDraw: ");
         canvas.drawBitmap(bitmap, drawX, drawY, showPaint);
         if (isDrawLast) {
             canvas.drawLine(startX, startY, startX, height, defaultPaint);

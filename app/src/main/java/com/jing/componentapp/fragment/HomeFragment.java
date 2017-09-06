@@ -15,6 +15,7 @@ import com.jing.library.adapter.BaseViewHolder;
 import com.jing.library.adapter.listener.OnRecyclerItemClickListener;
 import com.jing.library.base.BaseLazyFragment;
 import com.jing.library.utils.Helper;
+import com.jing.library.utils.LogUtil;
 import com.jing.library.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -33,10 +34,6 @@ import butterknife.Unbinder;
 
 public class HomeFragment extends BaseLazyFragment implements OnRefreshListener, OnLoadmoreListener, HomeView {
     private Unbinder bind;
-//    @BindView(R.id.tool_bar)
-//    Toolbar toolbar;
-//    @BindView(R.id.bar_name)
-//    TextView barName;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.refresh_layout)
@@ -54,9 +51,6 @@ public class HomeFragment extends BaseLazyFragment implements OnRefreshListener,
     @Override
     protected void init() {
         bind = ButterKnife.bind(this, contentView);
-//        toolbar.setNavigationIcon(R.drawable.icon_home);
-//        barName.setText("首页");
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);
         GridLayoutManager layoutManager = new GridLayoutManager(activity, 2);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
@@ -86,6 +80,7 @@ public class HomeFragment extends BaseLazyFragment implements OnRefreshListener,
 
     @Override
     protected void lazyData() {
+        LogUtil.i(TAG, "lazyData: ");
         refreshLayout.autoRefresh();
 
         adapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener() {

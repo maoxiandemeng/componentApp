@@ -36,9 +36,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     if (!isDebug.toBoolean()) {
-        compile project(':business_one')
-        compile project(':business_two')
         compile project(':router')
+        debugCompile project(path: ':business_one', configuration: 'debug')
+        releaseCompile project(path: ':business_one', configuration: 'release')
+        debugCompile project(path: ':business_two', configuration: 'debug')
+        releaseCompile project(path: ':business_two', configuration: 'release')
     } else {
         compile 'com.android.support:appcompat-v7:25.3.1'
     }

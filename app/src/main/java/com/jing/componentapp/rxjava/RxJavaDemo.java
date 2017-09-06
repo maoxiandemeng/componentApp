@@ -2,7 +2,7 @@ package com.jing.componentapp.rxjava;
 
 import android.util.Log;
 
-import com.jing.componentapp.tools.LogTool;
+import com.jing.library.utils.LogUtil;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -78,25 +78,25 @@ public class RxJavaDemo {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
                 System.out.println("onSubscribe: " + d.isDisposed());
-                LogTool.i("demoOne", "onSubscribe: " + d.isDisposed());
+                LogUtil.i("demoOne", "onSubscribe: " + d.isDisposed());
             }
 
             @Override
             public void onNext(@NonNull Integer i) {
                 System.out.println("onNext: " + i);
-                LogTool.i("demoOne", "onNext: " + i);
+                LogUtil.i("demoOne", "onNext: " + i);
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
                 System.out.println(e.getMessage());
-                LogTool.i("demoOne", "onError: " + e.getMessage());
+                LogUtil.i("demoOne", "onError: " + e.getMessage());
             }
 
             @Override
             public void onComplete() {
                 System.out.println("onComplete: " );
-                LogTool.i("demoOne", "onComplete");
+                LogUtil.i("demoOne", "onComplete");
             }
         };
         observable.subscribe(observer);

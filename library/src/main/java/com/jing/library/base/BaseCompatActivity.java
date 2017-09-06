@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+
+import com.jing.library.utils.LogUtil;
 
 /**
  * Created by liujing on 2017/7/17.
@@ -16,7 +17,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "--------onCreate--------");
+        LogUtil.d(TAG, "--------onCreate--------");
         setContentView(getLayoutResId());
     }
 
@@ -25,37 +26,37 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d(TAG, "--------onRestart--------");
+        LogUtil.d(TAG, "--------onRestart--------");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d(TAG, "--------onStart--------");
+        LogUtil.d(TAG, "--------onStart--------");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG, "--------onResume--------");
+        LogUtil.d(TAG, "--------onResume--------");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(TAG, "--------onPause--------");
+        LogUtil.d(TAG, "--------onPause--------");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(TAG, "--------onStop--------");
+        LogUtil.d(TAG, "--------onStop--------");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "--------onDestroy--------");
+        LogUtil.d(TAG, "--------onDestroy--------");
     }
 
     public void openActivity(Class<?> cls){

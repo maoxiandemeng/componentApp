@@ -6,6 +6,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jing.library.net.NetUtils;
+import com.jing.library.utils.LogUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -89,7 +90,7 @@ public class HttpHelper {
         httpClient.addInterceptor(new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-                Log.i("httpBody","httpBody: "+message);
+                LogUtil.i(TAG, message);
             }
         }).setLevel(HttpLoggingInterceptor.Level.BODY));
         //https请求添加证书
@@ -107,10 +108,10 @@ public class HttpHelper {
             base_url = (String) baseField.get(serviceClass);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
-            Log.e(TAG, "createService: 基本路径的属性必须是base_url定义");
+            LogUtil.e(TAG, "createService: 基本路径的属性必须是base_url定义");
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-            Log.e(TAG, "createService: 基本路径的属性必须是base_url定义");
+            LogUtil.e(TAG, "createService: 基本路径的属性必须是base_url定义");
         }
         Gson gson = new GsonBuilder().setLenient().create();
         Retrofit retrofit = new Retrofit.Builder()
@@ -129,13 +130,13 @@ public class HttpHelper {
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
             long t1 = System.nanoTime();
-            Log.v(TAG, String.format("Sending request %s on %s%n%s",
+            LogUtil.v(TAG, String.format("Sending request %s on %s%n%s",
                     request.url(), chain.connection(), request.headers()));
 
             Response response = chain.proceed(request);
             long t2 = System.nanoTime();
 
-            Log.v(TAG, String.format("Received response for %s in %.1fms%n%s",
+            LogUtil.v(TAG, String.format("Received response for %s in %.1fms%n%s",
                     response.request().url(), (t2 - t1) / 1e6d, response.headers()));
             return response;
         }

@@ -2,15 +2,17 @@ package com.jing.componentapp.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.jing.componentapp.R;
 import com.jing.componentapp.adapter.CartAdapter;
 import com.jing.library.base.BaseLazyFragment;
+import com.jing.library.utils.LogUtil;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +50,31 @@ public class CartFragment extends BaseLazyFragment {
         }
         adapter = new CartAdapter(activity, list);
         recyclerCart.setAdapter(adapter);
+
+        JSONObject object = new JSONObject();
+        try {
+            object.put("name","jon");
+            object.put("age","26");
+            object.put("address","上海");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        LogUtil.printJson(TAG, object.toString());
+
+        JSONArray array = new JSONArray();
+        array.put(object);
+        array.put(object);
+        array.put(object);
+        LogUtil.printJson(TAG, array.toString());
+
+        JSONObject object1 = new JSONObject();
+        try {
+            object1.put("person", object);
+            object1.put("array", array);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        LogUtil.printJson(TAG, object1.toString());
     }
 
     @Override
@@ -57,7 +84,7 @@ public class CartFragment extends BaseLazyFragment {
 
     @Override
     protected void lazyData() {
-
+        LogUtil.i(TAG, "lazyData: ");
     }
 
     @Override

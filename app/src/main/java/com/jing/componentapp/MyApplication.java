@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.jing.library.refresh.MaterialHeader;
+import com.jing.library.utils.CrashUtils;
 import com.jing.library.utils.Utils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
@@ -25,6 +26,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Utils.init(this);
+        CrashUtils.getInstance().init();
         SmartRefreshLayout.setDefaultRefreshHeaderCreater(new DefaultRefreshHeaderCreater() {
             @NonNull
             @Override

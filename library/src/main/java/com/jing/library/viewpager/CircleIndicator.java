@@ -12,12 +12,12 @@ import android.view.View;
 import com.jing.library.R;
 
 /**
+ * Created by liujing on 2017/8/28.
  * ViewPager的圆形指示器
  */
+
 public class CircleIndicator extends View {
 
-    private int mWidth;
-    private int mHeight;
     private float normalRadius = 3;    //普通点的半径
     private float selectedRadius = 4;  //选择点的半径
     private int normalRadiusColor = 0xDD333333;  //普通点的颜色
@@ -66,14 +66,6 @@ public class CircleIndicator extends View {
         initPaint();
     }
 
-    /**
-     * 各个方法执行顺序
-     * CircleIndicator
-     * onFinishInflate
-     * setXXX
-     * onSizeChanged
-     * onDraw
-     */
     private void initPaint() {
         mNormalPaint = new Paint();
         mNormalPaint.setAntiAlias(true);
@@ -88,23 +80,15 @@ public class CircleIndicator extends View {
         mSelectedPaint.setColor(selectedRadiusColor);
     }
 
-    /**
-     * 计算第一个圆的圆心位置
-     */
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        mWidth = w;
-        mHeight = h;
-//        float maxRadius = Math.max(normalRadius, selectedRadius);
-//        float availableWidth = w - getPaddingLeft() - getPaddingRight();
-//        float availableHeight = h - getPaddingTop() - getPaddingBottom();
-//        float drawWidth = (dotNum - 1) * dotPadding + maxRadius * 2;
-//        if (dotNum == 1)
-//            drawWidth = maxRadius * 2;
-//        if (dotNum <= 0)
-//            drawWidth = 0;
-//        mCx = (availableWidth - drawWidth) / 2 + maxRadius + getPaddingLeft();
-//        mCy = availableHeight / 2 + getPaddingTop();
+        float maxRadius = Math.max(normalRadius, selectedRadius);
+        float availableWidth = w - getPaddingLeft() - getPaddingRight();
+        float availableHeight = h - getPaddingTop() - getPaddingBottom();
+        float drawWidth = (dotNum - 1) * dotPadding + 2 * maxRadius * dotNum;
+        if (dotNum <= 0) drawWidth = 0;
+        mCx = (availableWidth - drawWidth) / 2 + getPaddingLeft();
+        mCy = availableHeight / 2 + getPaddingTop();
     }
 
     @Override
@@ -112,7 +96,7 @@ public class CircleIndicator extends View {
         if (dotNum > 0) {
             for (int i = 0; i < dotNum; i++) {
                 //绘制普通的圆
-                canvas.drawCircle(mCx + i * dotPadding, mCy, normalRadius, mNormalPaint);
+                canvas.drawCircle(mCx + i * (dotPadding + normalRadius) + selectedRadius, mCy, normalRadius, mNormalPaint);
             }
             //绘制选中的圆
             canvas.drawCircle(mCx + mTranslationX, mCy, selectedRadius, mSelectedPaint);
@@ -127,16 +111,6 @@ public class CircleIndicator extends View {
         dotNum = mViewPager.getAdapter().getCount();
         mListener = new MyOnPageChangeListener();
         mViewPager.addOnPageChangeListener(mListener);
-        float maxRadius = Math.max(normalRadius, selectedRadius);
-        float availableWidth = mWidth - getPaddingLeft() - getPaddingRight();
-        float availableHeight = mHeight - getPaddingTop() - getPaddingBottom();
-        float drawWidth = (dotNum - 1) * dotPadding + maxRadius * 2;
-        if (dotNum == 1)
-            drawWidth = maxRadius * 2;
-        if (dotNum <= 0)
-            drawWidth = 0;
-        mCx = (availableWidth - drawWidth) / 2 + maxRadius + getPaddingLeft();
-        mCy = availableHeight / 2 + getPaddingTop();
         return this;
     }
 
@@ -174,11 +148,10 @@ public class CircleIndicator extends View {
                     if ((position == dotNum - 1) && positionOffset > 0)
                         mTranslationX = (dotNum - 1) * dotPadding * (1 - positionOffset);
                     else
-                        mTranslationX = (position + positionOffset) * dotPadding;
+                        mTranslationX = (position + positionOffset) * dotPadding + position * normalRadius + selectedRadius;
                 }
                 invalidate();
             }
         }
     }
 }
-

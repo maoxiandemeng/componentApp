@@ -52,7 +52,6 @@ public abstract class BaseLazyFragment extends BaseCompatFragment {
         if (!isVisible || !isFirst || !isInit) {
             return;
         }
-        Log.i(getClass().getSimpleName(), "lazyData");
         lazyData();
         isFirst = false;
     }

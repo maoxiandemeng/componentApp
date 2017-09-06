@@ -9,8 +9,8 @@ import com.jing.componentapp.api.ApiRequest;
 import com.jing.componentapp.api.GankResult;
 import com.jing.componentapp.base.BaseActivity;
 import com.jing.componentapp.bean.FuLiBean;
-import com.jing.componentapp.tools.LogTool;
 import com.jing.library.http.HttpHelper;
+import com.jing.library.utils.LogUtil;
 import com.jing.library.utils.Utils;
 
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public class RxJavaActivity extends BaseActivity {
                 .doOnNext(new Consumer<GankResult<ArrayList<FuLiBean>>>() {
                     @Override
                     public void accept(@NonNull GankResult<ArrayList<FuLiBean>> arrayListGankResult) throws Exception {
-                        LogTool.i(TAG, "accept11111111111:  "+ System.currentTimeMillis());
+                        LogUtil.i(TAG, "accept11111111111:  "+ System.currentTimeMillis());
                     }
                 })
                 .observeOn(Schedulers.io())
@@ -69,12 +69,12 @@ public class RxJavaActivity extends BaseActivity {
                 .subscribe(new Consumer<GankResult<ArrayList<FuLiBean>>>() {
                     @Override
                     public void accept(@NonNull GankResult<ArrayList<FuLiBean>> arrayListGankResult) throws Exception {
-                        LogTool.i(TAG, "accept222222222:   "+ System.currentTimeMillis());
+                        LogUtil.i(TAG, "accept222222222:   "+ System.currentTimeMillis());
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
-                        LogTool.i(TAG, "throwable :" + throwable.getMessage()+"::::"+ System.currentTimeMillis());
+                        LogUtil.i(TAG, "throwable :" + throwable.getMessage()+"::::"+ System.currentTimeMillis());
                     }
                 });
 

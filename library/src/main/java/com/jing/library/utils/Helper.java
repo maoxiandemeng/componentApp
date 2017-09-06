@@ -13,11 +13,7 @@ import android.text.TextPaint;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
-
-import com.jing.library.BuildConfig;
-import com.jing.library.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
