@@ -4,7 +4,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.jing.componentapp.R;
-import com.jing.componentapp.activity.SpacesItemDecoration;
 import com.jing.componentapp.adapter.HomeAdapter;
 import com.jing.componentapp.bean.FuLiBean;
 import com.jing.componentapp.presenter.HomePresenter;
@@ -14,7 +13,7 @@ import com.jing.library.adapter.BaseRecyclerAdapter;
 import com.jing.library.adapter.BaseViewHolder;
 import com.jing.library.adapter.listener.OnRecyclerItemClickListener;
 import com.jing.library.base.BaseLazyFragment;
-import com.jing.library.utils.Helper;
+import com.jing.library.divider.DividerGridItemDecoration;
 import com.jing.library.utils.LogUtil;
 import com.jing.library.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -57,7 +56,7 @@ public class HomeFragment extends BaseLazyFragment implements OnRefreshListener,
 
         adapter = new HomeAdapter(activity, null);
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new SpacesItemDecoration(Helper.dp2px(8)));
+        recyclerView.addItemDecoration(new DividerGridItemDecoration(activity, R.drawable.divider_grid_8));
 
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadmoreListener(this);

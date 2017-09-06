@@ -8,6 +8,7 @@ import com.jing.componentapp.R;
 import com.jing.componentapp.activity.SpacesItemDecoration;
 import com.jing.componentapp.adapter.ShopAdapter;
 import com.jing.library.base.BaseLazyFragment;
+import com.jing.library.divider.DividerItemDecoration;
 import com.jing.library.utils.Helper;
 import com.jing.library.utils.LogUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -47,7 +48,7 @@ public class ShopFragment extends BaseLazyFragment implements OnRefreshListener,
 
         adapter = new ShopAdapter(activity, null);
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new SpacesItemDecoration(Helper.dp2px(8)));
+        recyclerView.addItemDecoration(new DividerItemDecoration(activity, R.drawable.divider_8, true));
 
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadmoreListener(this);

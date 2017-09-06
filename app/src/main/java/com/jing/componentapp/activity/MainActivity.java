@@ -70,7 +70,7 @@ public class MainActivity extends BaseActivity implements OnRecyclerItemClickLis
         recyclerView.setLayoutManager(manager);
         ArrayList<String> list = new ArrayList<>();
         list.add("RxJava");
-        list.add(String.valueOf(2));
+        list.add("横向滚动的RecyclerView");
         list.add(String.valueOf(3));
         list.add(String.valueOf(4));
         DrawerAdapter drawerAdapter = new DrawerAdapter(this, list);
@@ -167,6 +167,9 @@ public class MainActivity extends BaseActivity implements OnRecyclerItemClickLis
                 openActivity(RxJavaActivity.class);
                 break;
             case 1:
+                openActivity(HRecyclerActivity.class);
+                break;
+            case 2:
                 ActivitySchemeOpen.getInstance().getRouter().openOne("one");
                 break;
         }
