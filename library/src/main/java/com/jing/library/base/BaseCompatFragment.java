@@ -14,7 +14,7 @@ import android.view.ViewGroup;
  */
 
 public abstract class BaseCompatFragment extends Fragment {
-    private final String TAG = getClass().getSimpleName();
+    protected final String TAG = getClass().getSimpleName();
     protected BaseCompatActivity activity;
     protected View contentView;
 

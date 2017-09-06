@@ -6,6 +6,7 @@ import android.support.annotation.IntDef;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
@@ -33,6 +34,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
     public static final int TYPE_EMPTY = 2;
 
     protected Context context;
+    protected LayoutInflater inflater;
     private OnRecyclerItemClickListener onRecyclerItemClickListener;
 
     private View mHeaderView;
@@ -77,6 +79,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
 
     protected BaseRecyclerAdapter(Context context, ArrayList<T> mData) {
         this.context = context;
+        this.inflater = LayoutInflater.from(context);
         if (mData != null) {
             this.mData = mData;
         }

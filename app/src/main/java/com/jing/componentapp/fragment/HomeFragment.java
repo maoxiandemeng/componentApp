@@ -70,7 +70,6 @@ public class HomeFragment extends BaseLazyFragment implements OnRefreshListener,
 
         presenter = new HomePresenter(this);
 
-        refreshLayout.autoRefresh();
     }
 
     @Override
