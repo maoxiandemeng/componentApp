@@ -31,15 +31,15 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
         a.recycle();
     }
 
-    public DividerGridItemDecoration(Context context, int drawaleId) {
+    public DividerGridItemDecoration(Context context, int drawableId) {
         this(context);
-        mDivider = ContextCompat.getDrawable(context, drawaleId);
+        mDivider = ContextCompat.getDrawable(context, drawableId);
         setOrientation(VERTICAL);
     }
 
-    public DividerGridItemDecoration(Context context, int orientation, int drawaleId) {
+    public DividerGridItemDecoration(Context context, int orientation, int drawableId) {
         this(context);
-        mDivider = ContextCompat.getDrawable(context, drawaleId);
+        mDivider = ContextCompat.getDrawable(context, drawableId);
         setOrientation(orientation);
     }
 
@@ -204,8 +204,8 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
         //得到item在第几行
         int itemRow = itemPosition % rowCount + 1;
         //得到item在第几列
-        int itemColumn = itemPosition / columnCount + 1;
-        LogUtil.i(TAG, "columnCount: " + columnCount + "  rowCount: " + rowCount +"  itemRow: " + itemRow + "  itemColumn: " + itemColumn);
+        int itemColumn = itemPosition / rowCount + 1;
+        LogUtil.i(TAG, "rowCount: " + rowCount + "  columnCount: " + columnCount + "  itemRow: " + itemRow + "  itemColumn: " + itemColumn);
         if (itemRow == 1) {
             //第一行
             if (itemColumn == 1) {
@@ -221,27 +221,27 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
             //最后一行
             if (itemColumn == 1) {
                 //第一列
-                outRect.set(mDivider.getIntrinsicWidth(), 0, mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
+                outRect.set(mDivider.getIntrinsicWidth(), 0, mDivider.getIntrinsicWidth(), 0);
             } else if (itemColumn == columnCount) {
                 //最后一列
-                outRect.set(0, 0, mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
+                outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
             } else {
-                outRect.set(0, 0, mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
+                outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
             }
         } else {
             if (itemColumn == 1) {
                 //第一列
-                outRect.set(mDivider.getIntrinsicWidth(), 0, mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
+                outRect.set(mDivider.getIntrinsicWidth(), 0, mDivider.getIntrinsicWidth(), 0);
             } else if (itemColumn == columnCount) {
                 //最后一列
-                outRect.set(0, 0, mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
+                outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
             } else {
-                outRect.set(0, 0, mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
+                outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
             }
         }
     }
 
-    private void vertical(Rect outRect, RecyclerView parent, int itemPosition){
+    private void vertical(Rect outRect, RecyclerView parent, int itemPosition) {
         //得到总的列数
         int columnCount = getSpanCount(parent);
         //得到总的item个数
@@ -252,7 +252,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
         int itemRow = itemPosition / columnCount + 1;
         //得到item在第几列
         int itemColumn = itemPosition % columnCount + 1;
-        LogUtil.i(TAG, "columnCount: " + columnCount + "  rowCount: " + rowCount +"  itemRow: " + itemRow + "  itemColumn: " + itemColumn);
+        LogUtil.i(TAG, "columnCount: " + columnCount + "  rowCount: " + rowCount + "  itemRow: " + itemRow + "  itemColumn: " + itemColumn);
         if (itemRow == 1) {
             //第一行
             if (itemColumn == 1) {

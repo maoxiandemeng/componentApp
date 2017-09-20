@@ -12,7 +12,7 @@ import com.jing.library.utils.LogUtil;
  */
 
 public abstract class BaseCompatActivity extends AppCompatActivity {
-    private final String TAG = getClass().getSimpleName();
+    protected final String TAG = getClass().getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

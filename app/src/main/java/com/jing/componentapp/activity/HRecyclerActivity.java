@@ -53,7 +53,7 @@ public class HRecyclerActivity extends BaseActivity implements HomeView {
             }
         });
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 3, RecyclerView.HORIZONTAL, false);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -63,12 +63,12 @@ public class HRecyclerActivity extends BaseActivity implements HomeView {
 
         presenter = new HomePresenter(this);
         presenter.getData(1);
+
     }
 
     @Override
     public void showContent(ArrayList<FuLiBean> bean) {
         adapter.addData(bean);
-
     }
 
     @Override
