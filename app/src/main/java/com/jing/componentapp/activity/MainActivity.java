@@ -18,6 +18,7 @@ import com.jing.componentapp.adapter.MainPagerAdapter;
 import com.jing.componentapp.base.BaseActivity;
 import com.jing.componentapp.fragment.CartFragment;
 import com.jing.componentapp.fragment.HomeFragment;
+import com.jing.componentapp.fragment.MeFragment;
 import com.jing.componentapp.fragment.ShopFragment;
 import com.jing.componentapp.router.ActivitySchemeOpen;
 import com.jing.componentapp.rxjava.RxJavaActivity;
@@ -71,7 +72,7 @@ public class MainActivity extends BaseActivity implements OnRecyclerItemClickLis
         ArrayList<String> list = new ArrayList<>();
         list.add("RxJava");
         list.add("横向滚动的RecyclerView");
-        list.add(String.valueOf(3));
+        list.add("列表的倒计时");
         list.add(String.valueOf(4));
         DrawerAdapter drawerAdapter = new DrawerAdapter(this, list);
         recyclerView.setAdapter(drawerAdapter);
@@ -119,6 +120,10 @@ public class MainActivity extends BaseActivity implements OnRecyclerItemClickLis
                         viewPager.setCurrentItem(2);
                         ToastUtils.showShortToast("cart");
                         break;
+                    case R.id.tab_me:
+                        viewPager.setCurrentItem(3);
+                        ToastUtils.showShortToast("me");
+                        break;
                 }
             }
         });
@@ -135,6 +140,9 @@ public class MainActivity extends BaseActivity implements OnRecyclerItemClickLis
                     case R.id.tab_cart:
                         ToastUtils.showShortToast("cart2");
                         break;
+                    case R.id.tab_me:
+                        ToastUtils.showShortToast("me2");
+                        break;
                 }
             }
         });
@@ -142,11 +150,12 @@ public class MainActivity extends BaseActivity implements OnRecyclerItemClickLis
 
     private void initFragment() {
         viewPager.setCanScroll(false);
-        viewPager.setOffscreenPageLimit(2);
+        viewPager.setOffscreenPageLimit(3);
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
         fragments.add(new ShopFragment());
         fragments.add(new CartFragment());
+        fragments.add(new MeFragment());
         MainPagerAdapter mainAdapter = new MainPagerAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(mainAdapter);
     }
@@ -170,6 +179,9 @@ public class MainActivity extends BaseActivity implements OnRecyclerItemClickLis
                 openActivity(HRecyclerActivity.class);
                 break;
             case 2:
+                openActivity(ListDownTimeActivity.class);
+                break;
+            case 3:
                 ActivitySchemeOpen.getInstance().getRouter().openOne("one");
                 break;
         }

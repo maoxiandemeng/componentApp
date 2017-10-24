@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.jing.componentapp.R;
 import com.jing.componentapp.adapter.HRecyclerAdapter;
@@ -43,15 +42,7 @@ public class HRecyclerActivity extends BaseActivity implements HomeView {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        toolbar.setTitle("横向RecyclerView");
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        initToolbarBack(toolbar, "横向RecyclerView");
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false);
         recyclerView.setHasFixedSize(true);

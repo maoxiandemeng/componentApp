@@ -28,7 +28,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".rxjava.RxJavaActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.HRecyclerActivity" />
+        <activity android:name=".activity.HRecyclerActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ListDownTimeActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

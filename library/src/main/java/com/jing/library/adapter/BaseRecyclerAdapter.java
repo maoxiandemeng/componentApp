@@ -143,13 +143,13 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
         if (mHeaderView == null) {
             if (mEmptyView != null && size == 0) {
                 return 1;
-            } else if (size > 0){
+            } else if (size >= 0){
                 return size;
             }
         } else if (mHeaderView != null) {
             if (mEmptyView != null && size == 0) {
                 return getHeaderLayoutCount()+1;
-            } else if (size > 0){
+            } else if (size >= 0){
                 return size + getHeaderLayoutCount();
             }
         }

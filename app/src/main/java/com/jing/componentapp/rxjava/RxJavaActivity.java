@@ -41,9 +41,8 @@ public class RxJavaActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        toolBar.setTitle("RxJava");
+        initToolbarBack(toolBar, "RxJava");
         toolBar.setTitleTextColor(getResources().getColor(R.color.white));
-        setSupportActionBar(toolBar);
 
 //        RxJavaDemo.demoSix();
 //        RxJavaDemo.demoSeven();

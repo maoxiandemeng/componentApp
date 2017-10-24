@@ -3,13 +3,18 @@
     <tab
         icon="@drawable/icon_home_selector"
         id="@+id/tab_home"
-        title="首页"/>
+        title="首页" />
     <tab
         icon="@drawable/icon_shop_selector"
         id="@+id/tab_shop"
-        title="商店"/>
+        title="商店" />
     <tab
         icon="@drawable/icon_cart_selector"
         id="@+id/tab_cart"
-        title="购物车"/>
+        title="购物车" />
+    <tab
+        icon="@drawable/icon_cart_selector"
+        id="@+id/tab_me"
+        title="我" />
+
 </tabs>
