@@ -104,4 +104,24 @@ public class ProgressInfo implements Parcelable{
     public void setFinish(boolean finish) {
         this.finish = finish;
     }
+
+    /**
+     * 获取百分比,该计算舍去了小数点,如果你想得到更精确的值,请自行计算
+     *
+     * @return
+     */
+    public int getPercent() {
+        if (getCurrentBytes() <= 0 || getContentLength() <= 0) return 0;
+        return (int) ((100 * getCurrentBytes()) / getContentLength());
+    }
+
+    /**
+     * 获取上传或下载网络速度,单位为byte/s,如果你想得到更精确的值,请自行计算
+     *
+     * @return
+     */
+    public long getSpeed() {
+        if (getEachBytes() <= 0 || getIntervalTime() <= 0) return 0;
+        return getEachBytes() * 1000 / getIntervalTime();
+    }
 }
