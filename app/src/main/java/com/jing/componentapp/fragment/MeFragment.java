@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.jing.componentapp.R;
 import com.jing.componentapp.activity.DownLoadActivity;
+import com.jing.componentapp.activity.VideoPlayActivity;
 import com.jing.library.base.BaseLazyFragment;
 
 import butterknife.ButterKnife;
@@ -47,13 +48,16 @@ public class MeFragment extends BaseLazyFragment {
     }
 
 
-    @OnClick({R.id.btn_download, R.id.btn_look})
+    @OnClick({R.id.btn_download, R.id.btn_look, R.id.video_play})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_download:
                 openActivity(DownLoadActivity.class);
                 break;
             case R.id.btn_look:
+                break;
+            case R.id.video_play:
+                openActivity(VideoPlayActivity.class);
                 break;
         }
     }
