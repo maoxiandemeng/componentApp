@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.jing.library.utils.LogUtil;
+import com.jing.library.utils.ScreenUtils;
 
 /**
  * RecyclerView为GridLayoutManager和StaggeredGridLayoutManager时所需添加分割线的工具类
@@ -87,8 +88,10 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
                     + mDivider.getIntrinsicWidth();
             final int top = child.getBottom() + params.bottomMargin;
             final int bottom = top + mDivider.getIntrinsicHeight();
-//            LogUtil.i(TAG, "drawHorizontal" + mDivider.getIntrinsicHeight() + " left:" + left + "right:" + right + "top:" + top + "bottom:" + bottom);
+            LogUtil.i(TAG, "drawHorizontal" + mDivider.getIntrinsicHeight() + " left:" + left + "right:" + right + "top:" + top + "bottom:" + bottom);
             mDivider.setBounds(left, top, right, bottom);
+            mDivider.draw(c);
+            mDivider.setBounds(0, 0, right, mDivider.getIntrinsicHeight());
             mDivider.draw(c);
         }
     }
@@ -107,85 +110,15 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
 //            LogUtil.i(TAG, "drawVertical" + mDivider.getIntrinsicWidth() + " left:" + left + "right:" + right + "top:" + top + "bottom:" + bottom);
             mDivider.setBounds(left, top, right, bottom);
             mDivider.draw(c);
+            mDivider.setBounds(0, 0, mDivider.getIntrinsicWidth(), bottom + mDivider.getIntrinsicHeight());
+            mDivider.draw(c);
         }
-    }
-
-    /**
-     * 得到item是否在最后一列
-     *
-     * @param parent
-     * @param pos
-     * @param spanCount
-     * @param childCount
-     * @return
-     */
-    private boolean isLastColumn(RecyclerView parent, int pos, int spanCount,
-                                 int childCount) {
-        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
-        if (layoutManager instanceof GridLayoutManager) {
-            if ((pos + 1) % spanCount == 0)// 如果是最后一列，则不需要绘制右边
-            {
-                return true;
-            }
-        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
-            int orientation = ((StaggeredGridLayoutManager) layoutManager)
-                    .getOrientation();
-            if (orientation == StaggeredGridLayoutManager.VERTICAL) {
-                if ((pos + 1) % spanCount == 0)// 如果是最后一列，则不需要绘制右边
-                {
-                    return true;
-                }
-            } else {
-                childCount = childCount - childCount % spanCount;
-                if (pos >= childCount)// 如果是最后一列，则不需要绘制右边
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 得到item是否在最后一行
-     *
-     * @param parent
-     * @param pos
-     * @param spanCount
-     * @param childCount
-     * @return
-     */
-    private boolean isLastRow(RecyclerView parent, int pos, int spanCount,
-                              int childCount) {
-        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
-        int rows = childCount % spanCount == 0 ? childCount / spanCount : childCount / spanCount + 1;
-        if (layoutManager instanceof GridLayoutManager) {
-//            childCount = childCount - childCount % spanCount;
-            childCount = spanCount * (rows - 1);
-            if (pos >= childCount)// 如果是最后一行，则不需要绘制底部
-                return true;
-        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
-            int orientation = ((StaggeredGridLayoutManager) layoutManager)
-                    .getOrientation();
-            // StaggeredGridLayoutManager 且纵向滚动
-            if (orientation == StaggeredGridLayoutManager.VERTICAL) {
-                childCount = spanCount * (rows - 1);
-                // 如果是最后一行，则不需要绘制底部
-                if (pos >= childCount)
-                    return true;
-            } else
-            // StaggeredGridLayoutManager 且横向滚动
-            {
-                // 如果是最后一行，则不需要绘制底部
-                if ((pos + 1) % spanCount == 0) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        int itemPosition = ((RecyclerView.LayoutParams) view.getLayoutParams()).getViewLayoutPosition();
+        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
+        int itemPosition = layoutManager.getPosition(view) + 1;
         if (mOrientation == VERTICAL) {
             vertical(outRect, parent, itemPosition);
         } else if (mOrientation == HORIZONTAL) {
@@ -201,11 +134,11 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
         int rowCount = getSpanCount(parent);
         //得到总的列数
         int columnCount = childCount % rowCount == 0 ? childCount / rowCount : childCount / rowCount + 1;
-        //得到item在第几行
-        int itemRow = itemPosition % rowCount + 1;
         //得到item在第几列
-        int itemColumn = itemPosition / rowCount + 1;
-        LogUtil.i(TAG, "rowCount: " + rowCount + "  columnCount: " + columnCount + "  itemRow: " + itemRow + "  itemColumn: " + itemColumn);
+        int itemColumn = itemPosition % rowCount == 0 ? itemPosition / rowCount : itemPosition / rowCount + 1;
+        //得到item在第几行
+        int itemRow = itemPosition % rowCount == 0 ? rowCount : itemPosition % rowCount;
+//        LogUtil.i(TAG, "rowCount: " + rowCount + "  columnCount: " + columnCount + "  itemRow: " + itemRow + "  itemColumn: " + itemColumn);
         if (itemRow == 1) {
             //第一行
             if (itemColumn == 1) {
@@ -213,7 +146,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
                 outRect.set(mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight(), mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
             } else if (itemColumn == columnCount) {
                 //最后一列
-                outRect.set(0, mDivider.getIntrinsicHeight(), mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
+                outRect.set(0, mDivider.getIntrinsicHeight(), 0, mDivider.getIntrinsicHeight());
             } else {
                 outRect.set(0, mDivider.getIntrinsicHeight(), mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
             }
@@ -221,22 +154,22 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
             //最后一行
             if (itemColumn == 1) {
                 //第一列
-                outRect.set(mDivider.getIntrinsicWidth(), 0, mDivider.getIntrinsicWidth(), 0);
+                outRect.set(mDivider.getIntrinsicWidth(), 0, mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
             } else if (itemColumn == columnCount) {
                 //最后一列
-                outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
+                outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
             } else {
-                outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
+                outRect.set(0, 0, mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
             }
         } else {
             if (itemColumn == 1) {
                 //第一列
-                outRect.set(mDivider.getIntrinsicWidth(), 0, mDivider.getIntrinsicWidth(), 0);
+                outRect.set(mDivider.getIntrinsicWidth(), 0, mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
             } else if (itemColumn == columnCount) {
                 //最后一列
-                outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
+                outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
             } else {
-                outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
+                outRect.set(0, 0, mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
             }
         }
     }
@@ -249,10 +182,10 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
         //得到总的行数
         int rowCount = childCount % columnCount == 0 ? childCount / columnCount : childCount / columnCount + 1;
         //得到item在第几行
-        int itemRow = itemPosition / columnCount + 1;
+        int itemRow = itemPosition % columnCount == 0 ? itemPosition / columnCount : itemPosition / columnCount + 1;
         //得到item在第几列
-        int itemColumn = itemPosition % columnCount + 1;
-        LogUtil.i(TAG, "columnCount: " + columnCount + "  rowCount: " + rowCount + "  itemRow: " + itemRow + "  itemColumn: " + itemColumn);
+        int itemColumn = itemPosition % columnCount == 0 ? columnCount : itemPosition % columnCount;
+//        LogUtil.i(TAG, "columnCount: " + columnCount + "  rowCount: " + rowCount + "  itemRow: " + itemRow + "  itemColumn: " + itemColumn);
         if (itemRow == 1) {
             //第一行
             if (itemColumn == 1) {

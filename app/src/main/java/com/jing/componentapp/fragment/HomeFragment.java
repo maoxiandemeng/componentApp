@@ -2,6 +2,7 @@ package com.jing.componentapp.fragment;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.jing.componentapp.R;
 import com.jing.componentapp.adapter.HomeAdapter;
@@ -50,7 +51,7 @@ public class HomeFragment extends BaseLazyFragment implements OnRefreshListener,
     @Override
     protected void init() {
         bind = ButterKnife.bind(this, contentView);
-        GridLayoutManager layoutManager = new GridLayoutManager(activity, 2);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
