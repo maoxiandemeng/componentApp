@@ -46,6 +46,17 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
 
+        <Button
+            android:id="@+id/btn_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/blue"
+            android:padding="8dp"
+            android:text="Tab"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
     </android.support.v7.widget.LinearLayoutCompat>
 
 </ScrollView>

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.jing.componentapp.R;
 import com.jing.componentapp.activity.DownLoadActivity;
+import com.jing.componentapp.activity.TabActivity;
 import com.jing.componentapp.activity.VideoPlayActivity;
 import com.jing.library.base.BaseLazyFragment;
 
@@ -48,7 +49,7 @@ public class MeFragment extends BaseLazyFragment {
     }
 
 
-    @OnClick({R.id.btn_download, R.id.btn_look, R.id.video_play})
+    @OnClick({R.id.btn_download, R.id.btn_look, R.id.video_play, R.id.btn_tab})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_download:
@@ -58,6 +59,9 @@ public class MeFragment extends BaseLazyFragment {
                 break;
             case R.id.video_play:
                 openActivity(VideoPlayActivity.class);
+                break;
+            case R.id.btn_tab:
+                openActivity(TabActivity.class);
                 break;
         }
     }
