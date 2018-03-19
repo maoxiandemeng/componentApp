@@ -4,12 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jing.componentapp.R;
+import com.jing.componentapp.proxy.ProxyOnClick;
+import com.jing.componentapp.proxy.ProxyParam;
 import com.jing.library.adapter.BaseRecyclerAdapter;
 import com.jing.library.adapter.BaseViewHolder;
+import com.jing.library.utils.ToastUtils;
 
 import java.util.ArrayList;
 
@@ -41,7 +43,11 @@ public class ShopAdapter extends BaseRecyclerAdapter<String> {
         ShopHolder holder = (ShopHolder) viewHolder;
         String s = mData.get(realPosition);
         holder.tv.setText(s);
+
+        ItemOnClick defaultOnClick = new ItemOnClick(realPosition);
+        holder.tv.setOnClickListener(new ProxyOnClick(defaultOnClick).create());
     }
+
     public static class ShopHolder extends BaseViewHolder {
         @BindView(R.id.tv)
         TextView tv;
@@ -49,6 +55,25 @@ public class ShopAdapter extends BaseRecyclerAdapter<String> {
         public ShopHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+    }
+
+    class ItemOnClick implements View.OnClickListener, ProxyParam {
+        private int i;
+
+        public ItemOnClick(int i) {
+            this.i = i;
+        }
+
+        @Override
+        public void onClick(View view) {
+            ToastUtils.showShortToast(i+"");
+        }
+
+        @Override
+        public String getStr() {
+            if (i == 0) return "aa";
+            return "123";
         }
     }
 

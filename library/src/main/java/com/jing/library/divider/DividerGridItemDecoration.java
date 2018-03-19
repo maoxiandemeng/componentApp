@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.jing.library.utils.LogUtil;
-import com.jing.library.utils.ScreenUtils;
 
 /**
  * RecyclerView为GridLayoutManager和StaggeredGridLayoutManager时所需添加分割线的工具类
@@ -88,7 +87,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
                     + mDivider.getIntrinsicWidth();
             final int top = child.getBottom() + params.bottomMargin;
             final int bottom = top + mDivider.getIntrinsicHeight();
-            LogUtil.i(TAG, "drawHorizontal" + mDivider.getIntrinsicHeight() + " left:" + left + "right:" + right + "top:" + top + "bottom:" + bottom);
+//            LogUtil.i(TAG, "drawHorizontal" + mDivider.getIntrinsicHeight() + " left:" + left + "right:" + right + "top:" + top + "bottom:" + bottom);
             mDivider.setBounds(left, top, right, bottom);
             mDivider.draw(c);
             mDivider.setBounds(0, 0, right, mDivider.getIntrinsicHeight());
