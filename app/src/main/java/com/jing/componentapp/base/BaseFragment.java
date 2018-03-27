@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.jing.library.base.BaseLazyFragment;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 

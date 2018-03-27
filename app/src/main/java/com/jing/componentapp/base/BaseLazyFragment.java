@@ -1,8 +1,13 @@
-package com.jing.library.base;
+package com.jing.componentapp.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.view.View;
+
+import com.jing.library.base.BaseCompatFragment;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by liujing on 2017/7/19.
@@ -15,6 +20,13 @@ public abstract class BaseLazyFragment extends BaseCompatFragment {
     private boolean isFirst = true;
     //判断是否做了一些初始化的操作
     private boolean isInit = false;
+    private Unbinder bind;
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        bind = ButterKnife.bind(this, view);
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -28,6 +40,14 @@ public abstract class BaseLazyFragment extends BaseCompatFragment {
         super.onResume();
         if(getUserVisibleHint()){
             setUserVisibleHint(true);
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (bind != null) {
+            bind.unbind();
         }
     }
 

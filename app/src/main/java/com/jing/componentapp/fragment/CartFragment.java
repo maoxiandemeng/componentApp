@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.jing.componentapp.R;
 import com.jing.componentapp.adapter.CartAdapter;
-import com.jing.library.base.BaseLazyFragment;
+import com.jing.componentapp.base.BaseLazyFragment;
 import com.jing.library.utils.LogUtil;
 
 import org.json.JSONArray;
@@ -15,8 +15,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by liujing on 2017/7/19.
@@ -26,7 +24,6 @@ public class CartFragment extends BaseLazyFragment {
 
     @BindView(R.id.recycler_cart)
     RecyclerView recyclerCart;
-    private Unbinder bind;
     private CartAdapter adapter;
 
     @Override
@@ -36,7 +33,6 @@ public class CartFragment extends BaseLazyFragment {
 
     @Override
     protected void init() {
-        bind = ButterKnife.bind(this, contentView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerCart.setLayoutManager(layoutManager);
 
@@ -87,9 +83,4 @@ public class CartFragment extends BaseLazyFragment {
         LogUtil.i(TAG, "lazyData: ");
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        bind.unbind();
-    }
 }

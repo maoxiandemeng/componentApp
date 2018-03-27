@@ -5,11 +5,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.jing.componentapp.R;
-import com.jing.componentapp.activity.SpacesItemDecoration;
 import com.jing.componentapp.adapter.ShopAdapter;
-import com.jing.library.base.BaseLazyFragment;
+import com.jing.componentapp.base.BaseLazyFragment;
 import com.jing.library.divider.DividerItemDecoration;
-import com.jing.library.utils.Helper;
 import com.jing.library.utils.LogUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -19,15 +17,12 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by liujing on 2017/7/19.
  */
 
 public class ShopFragment extends BaseLazyFragment implements OnRefreshListener, OnLoadmoreListener{
-    private Unbinder bind;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.refresh_layout)
@@ -41,7 +36,6 @@ public class ShopFragment extends BaseLazyFragment implements OnRefreshListener,
 
     @Override
     protected void init() {
-        bind = ButterKnife.bind(this, contentView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
@@ -106,9 +100,4 @@ public class ShopFragment extends BaseLazyFragment implements OnRefreshListener,
 
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        bind.unbind();
-    }
 }
