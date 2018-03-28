@@ -4,15 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.jing.componentapp.R;
 import com.jing.componentapp.bean.FuLiBean;
+import com.jing.componentapp.widget.ReloadImageView;
 import com.jing.library.adapter.BaseRecyclerAdapter;
 import com.jing.library.adapter.BaseViewHolder;
-import com.jing.library.imageloader.ImageLoader;
-import com.jing.library.imageloader.ImageLoaderUtil;
 
 import java.util.ArrayList;
 
@@ -42,13 +39,14 @@ public class HomeAdapter extends BaseRecyclerAdapter<FuLiBean> {
     protected void onBind(BaseViewHolder viewHolder, int realPosition, int itemViewType) {
         HomeHolder holder = (HomeHolder) viewHolder;
         FuLiBean bean = mData.get(realPosition);
-        ImageLoader loader = new ImageLoader.Builder().url(bean.getUrl()).imgView(holder.img).build();
-        ImageLoaderUtil.getInstance().loadImage(context, loader);
+//        ImageLoader loader = new ImageLoader.Builder().url(bean.getUrl()).imgView(holder.img).build();
+//        ImageLoaderUtil.getInstance().loadImage(context, loader);
+        holder.img.setImageUrl(bean.getUrl());
     }
 
     public static class HomeHolder extends BaseViewHolder {
         @BindView(R.id.img)
-        ImageView img;
+        ReloadImageView img;
 
         public HomeHolder(View itemView) {
             super(itemView);

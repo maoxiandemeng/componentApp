@@ -3,6 +3,7 @@ package com.jing.componentapp.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.jing.componentapp.widget.DrawableCache;
 import com.jing.library.base.BaseCompatActivity;
 
 import butterknife.ButterKnife;
@@ -24,6 +25,7 @@ public abstract class BaseActivity extends BaseCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        DrawableCache.getInstance().clear();
         bind.unbind();
     }
 }
