@@ -1,10 +1,10 @@
 package com.jing.library.http;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jing.library.http.cookie.SimpleCookieJar;
 import com.jing.library.net.NetUtils;
 import com.jing.library.utils.LogUtil;
 
@@ -82,6 +82,7 @@ public class HttpHelper {
         httpClient.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
         httpClient.writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
         httpClient.readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        httpClient.cookieJar(new SimpleCookieJar());
 
         File httpCacheDirectory = new File(mContext.getCacheDir(), "okHttpCache");
         httpClient.cache(new Cache(httpCacheDirectory, 10 * 1024 * 1024));

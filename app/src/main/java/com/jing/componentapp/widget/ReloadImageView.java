@@ -28,6 +28,7 @@ public class ReloadImageView extends FrameLayout implements View.OnClickListener
     private ImageView iv;
     private TextView tv;
     private String url;
+    private boolean isSuccess = false;
 
     public ReloadImageView(@NonNull Context context) {
         this(context, null, 0);
@@ -48,20 +49,21 @@ public class ReloadImageView extends FrameLayout implements View.OnClickListener
         iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
         addView(iv);
         tv = new TextView(context);
-        tv.setText("点击重新加载");
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        tv.setText("点击此处\n重新加载");
         tv.setTextSize(12);
-        tv.setGravity(Gravity.CENTER);
-        addView(tv);
+        params.gravity = Gravity.CENTER;
+        addView(tv, params);
     }
 
     public void setImageUrl(String url){
         tv.setVisibility(GONE);
         if (DrawableCache.getInstance().hasKey(url)) {
             iv.setImageDrawable(DrawableCache.getInstance().get(url));
-            setOnClickListener(null);
+            tv.setOnClickListener(null);
         } else {
             this.url = url;
-            setOnClickListener(this);
+            tv.setOnClickListener(null);
             loadImage();
         }
     }
@@ -79,12 +81,16 @@ public class ReloadImageView extends FrameLayout implements View.OnClickListener
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         tv.setVisibility(VISIBLE);
+                        tv.setOnClickListener(ReloadImageView.this);
+                        isSuccess = false;
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         tv.setVisibility(GONE);
+                        tv.setOnClickListener(null);
+                        isSuccess = true;
                         if (!DrawableCache.getInstance().hasKey(url)) {
                             DrawableCache.getInstance().set(url, resource);
                         }
