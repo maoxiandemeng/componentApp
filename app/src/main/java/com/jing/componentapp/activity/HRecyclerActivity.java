@@ -14,6 +14,7 @@ import com.jing.componentapp.bean.FuLiBean;
 import com.jing.componentapp.presenter.HomePresenter;
 import com.jing.componentapp.view.HomeView;
 import com.jing.library.divider.DividerGridItemDecoration;
+import com.jing.library.divider.DividerGridItemDecorationTwo;
 import com.jing.library.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class HRecyclerActivity extends BaseActivity implements HomeView {
 
         adapter = new HRecyclerAdapter(this, null);
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new DividerGridItemDecoration(this, DividerGridItemDecoration.HORIZONTAL, R.drawable.divider_grid_8));
+        recyclerView.addItemDecoration(new DividerGridItemDecorationTwo(this, DividerGridItemDecoration.HORIZONTAL, R.drawable.divider_grid_8));
 
         presenter = new HomePresenter(this);
         presenter.getData(1);

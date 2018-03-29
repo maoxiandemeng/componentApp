@@ -14,6 +14,7 @@ import com.jing.library.adapter.BaseRecyclerAdapter;
 import com.jing.library.adapter.BaseViewHolder;
 import com.jing.library.adapter.listener.OnRecyclerItemClickListener;
 import com.jing.library.divider.DividerGridItemDecoration;
+import com.jing.library.divider.DividerGridItemDecorationTwo;
 import com.jing.library.utils.LogUtil;
 import com.jing.library.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -52,7 +53,7 @@ public class HomeFragment extends BaseLazyFragment implements OnRefreshListener,
 
         adapter = new HomeAdapter(activity, null);
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new DividerGridItemDecoration(activity, R.drawable.divider_grid_8));
+        recyclerView.addItemDecoration(new DividerGridItemDecorationTwo(activity, R.drawable.divider_grid_8));
 
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadmoreListener(this);

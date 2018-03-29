@@ -20,6 +20,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.internal.Util;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -86,14 +87,14 @@ public class HttpHelper {
 
         File httpCacheDirectory = new File(mContext.getCacheDir(), "okHttpCache");
         httpClient.cache(new Cache(httpCacheDirectory, 10 * 1024 * 1024));
-//        httpClient.addNetworkInterceptor(new LogInterceptor());
+        httpClient.addNetworkInterceptor(new LogInterceptor());
         httpClient.addInterceptor(new CacheControlInterceptor());
-        httpClient.addInterceptor(new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                LogUtil.i(TAG, message);
-            }
-        }).setLevel(HttpLoggingInterceptor.Level.BODY));
+//        httpClient.addInterceptor(new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+//            @Override
+//            public void log(String message) {
+//                LogUtil.i(TAG, message);
+//            }
+//        }).setLevel(HttpLoggingInterceptor.Level.BODY));
         //https请求添加证书
 //        httpClient.socketFactory(sslSocketFactory);
         //添加cookie信息
@@ -139,6 +140,8 @@ public class HttpHelper {
 
             LogUtil.v(TAG, String.format("Received response for %s in %.1fms%n%s",
                     response.request().url(), (t2 - t1) / 1e6d, response.headers()));
+
+            LogUtil.v(TAG, response.body().string());
             return response;
         }
     }

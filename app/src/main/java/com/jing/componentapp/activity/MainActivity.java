@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity implements OnRecyclerItemClickLis
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 //抽屉滑动时调用
-                LogUtil.i("onDrawerSlide", "slideOffset:" + slideOffset);
+//                LogUtil.i("onDrawerSlide", "slideOffset:" + slideOffset);
             }
 
             @Override
