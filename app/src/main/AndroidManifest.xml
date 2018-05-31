@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".MyApplication"
@@ -54,7 +55,14 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activity.TabActivity" />
+        <activity android:name=".activity.TabActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.LockScreenActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+
+        <service android:name=".service.LocalScreenService"
+            android:process=":lockscreen"/>
     </application>
 
 </manifest>

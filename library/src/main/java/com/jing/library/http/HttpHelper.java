@@ -11,17 +11,21 @@ import com.jing.library.utils.LogUtil;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.nio.charset.Charset;
+import java.nio.charset.UnsupportedCharsetException;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.internal.Util;
-import okhttp3.logging.HttpLoggingInterceptor;
+import okhttp3.ResponseBody;
+import okio.Buffer;
+import okio.BufferedSource;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -87,14 +91,9 @@ public class HttpHelper {
 
         File httpCacheDirectory = new File(mContext.getCacheDir(), "okHttpCache");
         httpClient.cache(new Cache(httpCacheDirectory, 10 * 1024 * 1024));
-        httpClient.addNetworkInterceptor(new LogInterceptor());
+//        httpClient.addNetworkInterceptor(new HttpLogInterceptor());
         httpClient.addInterceptor(new CacheControlInterceptor());
-//        httpClient.addInterceptor(new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-//            @Override
-//            public void log(String message) {
-//                LogUtil.i(TAG, message);
-//            }
-//        }).setLevel(HttpLoggingInterceptor.Level.BODY));
+        httpClient.addInterceptor(new HttpLogInterceptor());
         //https请求添加证书
 //        httpClient.socketFactory(sslSocketFactory);
         //添加cookie信息
@@ -127,6 +126,7 @@ public class HttpHelper {
     }
 
     private class LogInterceptor implements Interceptor {
+        private final Charset UTF8 = Charset.forName("UTF-8");
 
         @Override
         public Response intercept(Chain chain) throws IOException {
@@ -134,14 +134,39 @@ public class HttpHelper {
             long t1 = System.nanoTime();
             LogUtil.v(TAG, String.format("Sending request %s on %s%n%s",
                     request.url(), chain.connection(), request.headers()));
-
+//            LogUtil.i(TAG,  "Content-Type: " + request.body().contentType());
             Response response = chain.proceed(request);
             long t2 = System.nanoTime();
 
             LogUtil.v(TAG, String.format("Received response for %s in %.1fms%n%s",
                     response.request().url(), (t2 - t1) / 1e6d, response.headers()));
 
-            LogUtil.v(TAG, response.body().string());
+            ResponseBody responseBody = response.body();
+            long contentLength = responseBody.contentLength();
+//            if (!bodyEncoded(response.headers())) {
+                BufferedSource source = responseBody.source();
+                source.request(Long.MAX_VALUE); // Buffer the entire body.
+                Buffer buffer = source.buffer();
+
+                Charset charset = UTF8;
+                MediaType contentType = responseBody.contentType();
+                if (contentType != null) {
+                    try {
+                        charset = contentType.charset(UTF8);
+                    } catch (UnsupportedCharsetException e) {
+                        return response;
+                    }
+                }
+
+//                if (!isPlaintext(buffer)) {
+//                    return response;
+//                }
+
+                if (contentLength != 0) {
+                    LogUtil.i(TAG,  buffer.clone().readString(charset));
+                }
+
+//            }
             return response;
         }
     }
