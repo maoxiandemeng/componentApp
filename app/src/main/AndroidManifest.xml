@@ -60,6 +60,10 @@
         <activity android:name=".activity.LockScreenActivity"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.ScrollViewGoneActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.RecyclerViewAutoScrollBottomActivity"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".service.LocalScreenService"
             android:process=":lockscreen"/>

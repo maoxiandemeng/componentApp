@@ -7,12 +7,16 @@ import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.jing.componentapp.R;
 import com.jing.componentapp.activity.DownLoadActivity;
+import com.jing.componentapp.activity.RecyclerViewAutoScrollBottomActivity;
+import com.jing.componentapp.activity.ScrollViewGoneActivity;
 import com.jing.componentapp.activity.TabActivity;
 import com.jing.componentapp.activity.VideoPlayActivity;
 import com.jing.componentapp.base.BaseLazyFragment;
 import com.jing.componentapp.service.LocalScreenService;
 import com.jing.componentapp.widget.ReloadImageView;
 import com.jing.library.utils.LogUtil;
+import com.jing.library.widget.SelectImageView;
+import com.jing.library.widget.StateTextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +37,10 @@ public class MeFragment extends BaseLazyFragment {
 
     @BindView(R.id.re_iv)
     ReloadImageView reIv;
+    @BindView(R.id.state_tv)
+    StateTextView stateTv;
+    @BindView(R.id.select_img)
+    SelectImageView selectImg;
 
     private String str = "{\"code\":\"0\",\"message\":\"获取成功\",\"data\":{\"id\":174,\"name\":\"sadsadas.zml\",\"grade\":\"一年级\",\"gradeId\":1,\"subject\":\"语文\",\"subjectId\":1,\"edition\":\"沪教版\",\"editionId\":90,\"courseSystemFirstId\":16569,\"courseSystemFirstName\":\"测试1-1\",\"courseSystemSecondId\":16609,\"courseSystemSecondName\":\"测试2-1\",\"courseSystemThirdId\":16610,\"courseSystemThirdName\":\"测试3-1\",\"courseSystemFourthId\":16611,\"courseSystemFourthName\":\"测试4-1\",\"difficulty\":1,\"difficultyStr\":\"一星\",\"scene\":\"2\",\"sceneStr\":\"同步\",\"content\":\"[{\\\"id\\\":5337510,\\\"name\\\":\\\"知识图谱\\\",\\\"type\\\":\\\"dir\\\",\\\"children\\\":[{\\\"id\\\":5337511,\\\"type\\\":\\\"page\\\"}]},{\\\"id\\\":5337512,\\\"name\\\":\\\"错题回顾\\\",\\\"type\\\":\\\"dir\\\",\\\"children\\\":[{\\\"id\\\":5337513,\\\"type\\\":\\\"page\\\"}]},{\\\"id\\\":5337514,\\\"name\\\":\\\"课后作业\\\",\\\"type\\\":\\\"dir\\\",\\\"children\\\":[{\\\"id\\\":5337515,\\\"type\\\":\\\"page\\\"}]},{\\\"id\\\":5339801,\\\"type\\\":\\\"slide\\\",\\\"slideId\\\":1198,\\\"name\\\":\\\"asdasda\\\",\\\"children\\\":[{\\\"id\\\":5337516,\\\"name\\\":\\\"知识精讲\\\",\\\"type\\\":\\\"dir\\\",\\\"children\\\":[{\\\"id\\\":5337517,\\\"type\\\":\\\"page\\\"}]},{\\\"id\\\":5337518,\\\"name\\\":\\\"三点剖析\\\",\\\"type\\\":\\\"dir\\\",\\\"children\\\":[{\\\"id\\\":5337519,\\\"name\\\":\\\"重点\\\",\\\"type\\\":\\\"dir\\\",\\\"children\\\":[{\\\"id\\\":5337520,\\\"type\\\":\\\"page\\\"}]},{\\\"id\\\":5337521,\\\"name\\\":\\\"难点\\\",\\\"type\\\":\\\"dir\\\",\\\"children\\\":[{\\\"id\\\":5337522,\\\"type\\\":\\\"page\\\"}]},{\\\"id\\\":5337523,\\\"name\\\":\\\"易错点\\\",\\\"type\\\":\\\"dir\\\",\\\"children\\\":[{\\\"id\\\":5337524,\\\"type\\\":\\\"page\\\"}]}]},{\\\"id\\\":5337525,\\\"name\\\":\\\"题模精讲\\\",\\\"type\\\":\\\"dir\\\",\\\"children\\\":[{\\\"id\\\":5337526,\\\"type\\\":\\\"page\\\"}]},{\\\"id\\\":5337527,\\\"name\\\":\\\"随堂练习\\\",\\\"type\\\":\\\"dir\\\",\\\"children\\\":[{\\\"id\\\":5337528,\\\"type\\\":\\\"page\\\"}]}]}]\"}}";
     //    private String str = "{\"id\":5337510,\"name\":\"知识图谱\",\"type\":\"dir\",\"children\":[{\"id\":5337511,\"type\":\"page\"},{\"id\":5337512,\"type\":\"page\"}]}";
@@ -96,10 +104,10 @@ public class MeFragment extends BaseLazyFragment {
         }
 
         String json = new Gson().toJson(jsonBeans);
-        LogUtil.i(TAG, "json: "+json);
+        LogUtil.i(TAG, "json: " + json);
 
         ArrayList<String> list = new Gson().fromJson(json, ArrayList.class);
-        for (String s :list) {
+        for (String s : list) {
             JsonBean jsonBean = new Gson().fromJson(s, JsonBean.class);
             LogUtil.i(TAG, "s" + s);
             LogUtil.i(TAG, "bean " + jsonBean.getId());
@@ -119,32 +127,34 @@ public class MeFragment extends BaseLazyFragment {
                     if ("page".equals(hashMap.get("type"))) {
                         count++;
                         Double id = (Double) hashMap.get("id");
-                        LogUtil.i(TAG, "id: " + id + "page: " + count + "hashMap： " +paramsToJsonString(hashMap));
+                        LogUtil.i(TAG, "id: " + id + "page: " + count + "hashMap： " + paramsToJsonString(hashMap));
                         jsonBeans.add(paramsToJsonString(hashMap));
                     }
                 }
             }
         }
     }
+
     public String paramsToJsonString(Map<String, Object> params) {
         if (params != null && params.size() > 0) {
             JSONObject object = new JSONObject();
-                for (Map.Entry<String, Object> entry : params.entrySet()) {
-                    try {
-                        object.put(entry.getKey(), entry.getValue());
-                        return object.toString();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        return "";
-                    }
+            for (Map.Entry<String, Object> entry : params.entrySet()) {
+                try {
+                    object.put(entry.getKey(), entry.getValue());
+                    return object.toString();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return "";
                 }
+            }
 
         }
         return "";
     }
 
-
-    @OnClick({R.id.btn_download, R.id.btn_look, R.id.video_play, R.id.btn_tab})
+    private boolean isSelected = false;
+    @OnClick({R.id.btn_download, R.id.btn_look, R.id.video_play, R.id.btn_tab, R.id.state_tv, R.id.select_img,
+            R.id.btn_sv, R.id.btn_rv_auto})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_download:
@@ -157,6 +167,22 @@ public class MeFragment extends BaseLazyFragment {
                 break;
             case R.id.btn_tab:
                 openActivity(TabActivity.class);
+                break;
+            case R.id.btn_sv:
+                openActivity(ScrollViewGoneActivity.class);
+                break;
+            case R.id.btn_rv_auto:
+                openActivity(RecyclerViewAutoScrollBottomActivity.class);
+                break;
+            case R.id.state_tv:
+                LogUtil.d(TAG, "state_tv");
+                isSelected = !isSelected;
+//                selectImg.setSelected(isSelected);
+                stateTv.setSelected(isSelected);
+                selectImg.setEnabled(isSelected);
+                break;
+            case R.id.select_img:
+                selectImg.setSelected(true);
                 break;
         }
     }

@@ -57,10 +57,60 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
 
+        <Button
+            android:id="@+id/btn_sv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/blue"
+            android:padding="8dp"
+            android:text="ScrollView隐藏滚动问题"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_rv_auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/blue"
+            android:padding="8dp"
+            android:text="RecyclerView添加数据自动滚到底部"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
         <com.jing.componentapp.widget.ReloadImageView
             android:id="@+id/re_iv"
             android:layout_width="150dp"
             android:layout_height="120dp" />
+
+        <com.jing.library.widget.StateTextView
+            android:layout_marginLeft="50dp"
+            android:id="@+id/state_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="测试背景色"
+            android:gravity="center"
+            android:drawablePadding="10dp"
+            app:conner_radius="5dp"
+            app:icon_direction="right"
+            app:background_normal="@color/white"
+            app:text_color_normal="@color/tab_normal"
+            app:icon_normal="@drawable/icon_home"
+            app:border_width="2dp"
+            app:background_press="@color/white"
+            app:text_color_press="@color/tab_select"
+            app:icon_press="@drawable/icon_home_selected"
+            />
+
+        <com.jing.library.widget.SelectImageView
+            android:id="@+id/select_img"
+            android:layout_margin="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:unable_img="@drawable/icon_home"
+            app:normal_img="@drawable/icon_shop"
+            app:selected_img="@drawable/icon_shop_selected"/>
 
     </android.support.v7.widget.LinearLayoutCompat>
 

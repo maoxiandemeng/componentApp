@@ -77,4 +77,39 @@
         <attr name="mhShadowRadius" format="dimension"/>
         <attr name="mhShowBezierWave" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="StateTextView">
+        <attr name="background_normal" format="color"/>
+        <attr name="background_press" format="color"/>
+        <attr name="conner_radius" format="dimension"/>
+        <attr name="left_top_radius" format="dimension"/>
+        <attr name="left_bottom_radius" format="dimension"/>
+        <attr name="right_top_radius" format="dimension"/>
+        <attr name="right_bottom_radius" format="dimension"/>
+        <attr name="border_width" format="dimension"/>
+        <attr name="border_color_normal" format="color"/>
+        <attr name="border_color_press" format="color"/>
+        <attr name="dash_width" format="dimension"/>
+        <attr name="dash_gap" format="dimension"/>
+        <attr name="text_color_normal" format="color"/>
+        <attr name="text_color_press" format="color"/>
+        <attr name="icon_normal" format="reference"/>
+        <attr name="icon_press" format="reference"/>
+        <attr name="icon_direction">
+            <enum name="left" value="1"/>
+            <enum name="right" value="2"/>
+            <enum name="top" value="3"/>
+            <enum name="bottom" value="4"/>
+        </attr>
+        <attr name="mode" format="enum">
+            <enum name="press" value="1"/>
+            <enum name="select" value="2"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="SelectImageView">
+        <attr name="unable_img" format="reference"/>
+        <attr name="normal_img" format="reference"/>
+        <attr name="selected_img" format="reference"/>
+    </declare-styleable>
 </resources>
